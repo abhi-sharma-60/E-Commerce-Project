@@ -1,5 +1,7 @@
 import React from 'react'
 import { FaSearch } from "react-icons/fa"
+import { FaUserCircle } from "react-icons/fa"
+import { MdOutlineShoppingCart } from "react-icons/md"
 
 const Header = () => {
   return (
@@ -17,8 +19,18 @@ const Header = () => {
                 </div>
             </div>
 
-            <div>
-                user icons and card
+            <div className='flex items-center gap-4'>
+                
+                <div className='text-3xl cursor-pointer'>
+                    <FaUserCircle/>
+                </div>
+
+                <div className='text-2xl relative'>
+                    <span><MdOutlineShoppingCart/></span>
+                    <div className='bg-red-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-3'>
+                              <p className='text-sm'>0</p>
+                          </div>
+                </div>
             </div>
         </div>
     </header>
