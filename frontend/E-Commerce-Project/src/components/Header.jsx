@@ -2,13 +2,16 @@ import React from 'react'
 import { FaSearch } from "react-icons/fa"
 import { FaUserCircle } from "react-icons/fa"
 import { MdOutlineShoppingCart } from "react-icons/md"
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
-    <header className='h-16 shadow-md'>
+    <header className='h-16 shadow-md bg-white'>
         <div className='h-full container mx-auto flex items-center px-4 justify-between'>
             <div className=''>
-                {/*Logo*/}
+                <Link to={"/"}>
+                    {/*Logo*/}logo
+                </Link>
             </div>
 
 
@@ -33,7 +36,7 @@ const Header = () => {
                 </div>
 
                 <div>
-                    <button className='px-3 py-1 rounded-full text-white bg-red-600 hover:bg-red-700'>Login</button>
+                    <Link to={"/login"} className='px-3 py-1 rounded-full text-white bg-red-600 hover:bg-red-700'>Login</Link>
                 </div>
 
 
