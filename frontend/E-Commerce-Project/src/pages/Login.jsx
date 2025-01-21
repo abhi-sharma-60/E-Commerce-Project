@@ -2,7 +2,7 @@ import React from 'react'
 import { FaEye } from "react-icons/fa"
 import { useState } from 'react'
 import { FaEyeSlash } from "react-icons/fa";
-import { FaUserCircle } from "react-icons/fa"
+import loginIcons from '../assets/loginIcons.png'
 import { Link } from 'react-router-dom';
 
 const Login = () => {
@@ -25,18 +25,20 @@ const Login = () => {
         })
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
 
 
-
-  return (
+return (
     <section id='login'>
         <div className='mx-auto container p-4'>
             <div className='bg-white p-5 w-full max-w-sm mx-auto'>
                 <div className='w-20 h-20 mx-auto text-8xl'>
-                        <FaUserCircle/>
+                        <img src={loginIcons} alt = "login icons"/>
                 </div>
 
-                <form className='pt-6 flex flex-col gap-2'>
+                <form className='pt-6 flex flex-col gap-2' onSubmit={handleSubmit}>
                     <div className='grid'>
                         <label>Email : </label>
                         <div className='bg-slate-100 p-2'>
