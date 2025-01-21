@@ -5,6 +5,13 @@ const bcrypt = require("bcryptjs");
 async function userSignUpController(req, res) {
   try {
     const { email, password, name } = req.body;
+
+    const user = await userModel.findOne({ email });
+
+    // console.log("User", user);
+    if (user) {
+        throw new Error("Already User Exists.");
+    }
     if (!email) {
       throw new Error("Please provide email");
     }
@@ -33,8 +40,9 @@ async function userSignUpController(req, res) {
       message: "User Created Successfully!",
     });
   } catch (err) {
+    // console.log("err", err.message);
     res.json({
-      message: err,
+      message: err.message || err,
       error: true,
       success: false,
     });
