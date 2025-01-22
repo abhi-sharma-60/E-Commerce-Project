@@ -3,7 +3,7 @@ const userModel = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-async function userSignInController(req, res) {
+async function userDetailsController(req, res) {
   try {
     const { email, password } = req.body;
 
@@ -35,7 +35,7 @@ async function userSignInController(req, res) {
         httpOnly: true,
         secure: true,
       };
-      res.cookie("token", token,tokenOption).status(200).json({
+      res.cookie("token", token, tokenOption).status(200).json({
         message: "Login Successfully",
         data: token,
         success: true,
@@ -45,7 +45,7 @@ async function userSignInController(req, res) {
       throw new Error("Please Check Passowrd.");
     }
   } catch (err) {
-    res.json({
+    res.status(400).json({
       message: err.message || err,
       error: true,
       success: false,
@@ -53,4 +53,4 @@ async function userSignInController(req, res) {
   }
 }
 
-module.exports = userSignInController;
+module.exports = userDetailsController;
