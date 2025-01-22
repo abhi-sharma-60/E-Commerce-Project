@@ -5,6 +5,7 @@ import { FaEyeSlash } from "react-icons/fa";
 import loginIcons from '../assets/loginIcons.png'
 import { Link } from 'react-router-dom';
 import imageTobase64 from '../helpers/imageTobase64';
+import SummaryApi from '../common';
 
 const SignUp = () => {
 
@@ -26,10 +27,21 @@ const SignUp = () => {
                   [name] : value
               }
           })
+          console.log(data)
       }
   
-      const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
           e.preventDefault();
+          const dataResponse = await fetch(SummaryApi.signUP.url,{
+            method: SummaryApi.signUP.method,
+            headers: {
+                "content-type" : "application/json"
+            },
+            body: JSON.stringify(data)
+          })
+
+          const dataApi = await dataResponse.json()
+          console.log(dataApi)
       }
 
       const handleUploadPic = async(e) =>{
