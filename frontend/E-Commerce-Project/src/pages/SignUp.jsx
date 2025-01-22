@@ -3,13 +3,15 @@ import { FaEye } from "react-icons/fa"
 import { useState } from 'react'
 import { FaEyeSlash } from "react-icons/fa";
 import loginIcons from '../assets/loginIcons.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import imageTobase64 from '../helpers/imageTobase64';
 import SummaryApi from '../common';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
 
   const [showPassword,setShowPassword] = useState(false)
+  const navigate = useNavigate()
   
       const [data,setData] = useState({
           name: "",
@@ -27,7 +29,6 @@ const SignUp = () => {
                   [name] : value
               }
           })
-          console.log(data)
       }
   
       const handleSubmit = async (e) => {
@@ -41,7 +42,14 @@ const SignUp = () => {
           })
 
           const dataApi = await dataResponse.json()
-          console.log(dataApi)
+          if(dataApi.success){
+            toast.success(dataApi.message)
+            navigate("/login")
+          }
+
+          if(dataApi.error){
+            toast.error(dataApi.message)
+          }
       }
 
       const handleUploadPic = async(e) =>{
