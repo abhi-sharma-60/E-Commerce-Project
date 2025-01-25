@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema(
       type: String, // URL or file path for the profile picture
       default: "", // Default value if no profile picture is provided
     },
+    role: String,
   },
   {
     timestamps: true, // Automatically adds `createdAt` and `updatedAt` fields
