@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 async function userSignInController(req, res) {
+  // console.log("Request Body:", req.body);
+
   try {
     const { email, password } = req.body;
 
