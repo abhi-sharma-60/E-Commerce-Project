@@ -66,7 +66,7 @@ const Header = () => {
                         menu && (
                             <div className='absolute bg-white bottom-0 top-11 h-fit p-2 shadow-lg rounded'>
                                 <nav>
-                                    <Link to={'admin-panel'} className='whitespace-nowrap hover:bg-slate-100 p-2' onClick={() => setMenu(prev => !prev)}>Admin Panel</Link>
+                                    <Link to={'admin-panel'} className='whitespace-nowrap hidden md:block hover:bg-slate-100 p-2' onClick={() => setMenu(prev => !prev)}>Admin Panel</Link>
                                 </nav>
                             </div>
                         )

@@ -35,7 +35,7 @@ const AdminPanel = () => {
 
         </aside>
 
-        <main>
+        <main className='w-full h-full p-2'>
             <Outlet/>
         </main>
     </div>
