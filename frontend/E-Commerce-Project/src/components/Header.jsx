@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { FaSearch } from "react-icons/fa"
 import { FaUserCircle } from "react-icons/fa"
 import { MdOutlineShoppingCart } from "react-icons/md"
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {toast} from 'react-toastify'
+import { setUserDetails } from '../store/userSlice'
+import SummaryApi from '../common'
+import ROLE from '../common/role'
+import Context from '../context'
 
 const Header = () => {
   const user = useSelector(state => state?.user?.user)
