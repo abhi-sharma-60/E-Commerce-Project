@@ -17,21 +17,21 @@ async function userDetailsController(req, res) {
       message : "User details : "
     })
 
-    if (!user) {
-      throw new Error("User not found.");
-    }
+    // if (!user) {
+    //   throw new Error("User not found.");
+    // }
 
-    // Return the user details
-    res.status(200).json({
-      data: user,
-      message: "User details fetched successfully.",
-      error: false,
-      success: true,
-    });
+    // // Return the user details
+    // res.status(200).json({
+    //   data: user,
+    //   message: "User details fetched successfully.",
+    //   error: false,
+    //   success: true,
+    // });
   } catch (err) {
     // Handle errors and send an error response
     res.status(400).json({
-      message: err.message || "An unexpected error occurred.",
+      message: err.message || err,
       error: true,
       success: false,
     });
