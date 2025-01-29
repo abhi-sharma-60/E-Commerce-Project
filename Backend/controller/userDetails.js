@@ -6,7 +6,7 @@ async function userDetailsController(req, res) {
     if (!req.user || !req.userId) {
       throw new Error("User ID is missing. Please authenticate.");
     }
-    console.log(req.userId);
+    // console.log(req.userId);
     // Fetch the user details from the database
     const user = await userModel.findById(req.userId);
     // console.log(user);
