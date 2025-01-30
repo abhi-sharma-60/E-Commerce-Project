@@ -1,11 +1,11 @@
 const productModel = require("../../models/productModel");
 
-const getCategoryProduct = async (req, res) => {
+const getCategoryProductOne = async (req, res) => {
   try {
     const productCategory = await productModel.distinct("category");
 
     // console.log("category",productCategory);
-
+ 
     // array to store one product from each category
     const productByCategory = [];
 
@@ -30,4 +30,4 @@ const getCategoryProduct = async (req, res) => {
   }
 };
 
-module.exports = getCategoryProduct;
+module.exports = getCategoryProductOne;
