@@ -123,7 +123,7 @@ const UploadProduct = (
                 />
 
                 <label htmlFor="category" className='mt-3'>Category : </label>
-                <select value={data.category} name="category" onChange={handleOnChange} className='p-2 bg-slate-100 border rounded'>
+                <select required value={data.category} name="category" onChange={handleOnChange} className='p-2 bg-slate-100 border rounded'>
                     
                 <option value={""}>Select a Category</option>
                     
