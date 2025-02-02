@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { IoCloseSharp } from "react-icons/cg";
+import { IoCloseSharp } from "react-icons/io5";
 import productCategory from '../helpers/productCategory';
-import { MdCloudUpload } from "react-icons/fa";
+import { MdCloudUpload } from "react-icons/md";
 import uploadImage from '../helpers/uploadImage';
 import DisplayImage from './DisplayImage';
 import { MdDelete } from "react-icons/md";
