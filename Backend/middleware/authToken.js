@@ -8,7 +8,7 @@ async function authToken(req, res, next) {
     // If no token is found, return a 401 status indicating unauthorized access.
     if (!token) {
       return res.status(401).json({
-        message: "User Not Logged In",
+        message: "Please Login",
         error: true,
         success: false,
       });
