@@ -14,9 +14,9 @@ const countAddToCartProduct = async (req, res) => {
     });
   } catch (err) {
     res.json({
-      message: error.message || error,
-      error: false,
-      success: true,
+      message: err.message || err,
+      error: true,
+      success: false,
     });
   }
 };
