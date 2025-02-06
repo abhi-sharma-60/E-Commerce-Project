@@ -1,21 +1,17 @@
 const addToCartModel = require("../../models/addToCartModel");
 
-const updateAddToCartProduct = async (req, res) => {
+const deleteAddToCartProduct = async (req, res) => {
   try {
     const currentUser = req.userId;
     const addToCartProductId = req.body._id;
-    const qty = req.body.quantity;
-    const updateProduct = await addToCartModel.updateOne(
+    const deleteProduct = await addToCartModel.deleteOne(
       {
         _id: addToCartProductId,
-      },
-      {
-        ...(qty && { quantity: qty }),
       }
     );
     res.json({
-      data: updateProduct,
-      message: "update cart",
+      data: deleteProduct,
+      message: "Product deleted from cart",
       error: false,
       success: true,
     });
@@ -28,4 +24,4 @@ const updateAddToCartProduct = async (req, res) => {
   }
 };
 
-module.exports = updateAddToCartProduct;
+module.exports = deleteAddToCartProduct;
