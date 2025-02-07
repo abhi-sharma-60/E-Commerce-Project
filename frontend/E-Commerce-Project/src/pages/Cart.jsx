@@ -66,7 +66,7 @@ const Cart = () => {
     }
 
 
-    const decreaseQty = async(id,qty) =>{
+    const decraseQty = async(id,qty) =>{
        if(qty >= 2){
             const response = await fetch(SummaryApi.updateCartProduct.url,{
                 method : SummaryApi.updateCartProduct.method,
@@ -158,7 +158,7 @@ const Cart = () => {
                                             <p className='text-slate-600 font-semibold text-lg'>{displayINRCurrency(product?.productId?.sellingPrice  * product?.quantity)}</p>
                                     </div>
                                     <div className='flex items-center gap-3 mt-1'>
-                                        <button className='border border-red-600 text-red-600 hover:bg-red-600 hover:text-white w-6 h-6 flex justify-center items-center rounded ' onClick={()=>decreaseQty(product?._id,product?.quantity)}>-</button>
+                                        <button className='border border-red-600 text-red-600 hover:bg-red-600 hover:text-white w-6 h-6 flex justify-center items-center rounded ' onClick={()=>decraseQty(product?._id,product?.quantity)}>-</button>
                                         <span>{product?.quantity}</span>
                                         <button className='border border-red-600 text-red-600 hover:bg-red-600 hover:text-white w-6 h-6 flex justify-center items-center rounded ' onClick={()=>increaseQty(product?._id,product?.quantity)}>+</button>
                                     </div>
