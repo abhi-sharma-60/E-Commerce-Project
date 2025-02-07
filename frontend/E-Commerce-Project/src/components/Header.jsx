@@ -15,6 +15,7 @@ const Header = () => {
   const dispatch = useDispatch()
 
   const [menu,setMenu] = useState(false)
+  const context = useContext(Context)
 
 
   const handleLogout = async() => {
@@ -90,12 +91,22 @@ const Header = () => {
 
                 </div>
 
-                <div className='text-2xl relative'>
-                    <span><MdOutlineShoppingCart/></span>
-                    <div className='bg-red-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-3'>
-                        <p className='text-sm'>0</p>
-                    </div>
-                </div>
+                {
+                    user?._id && (
+                        <div className='text-2xl relative'>
+                            <span><MdOutlineShoppingCart/></span>
+                    
+                        
+                            <div className='bg-red-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-3'>
+                                <p className='text-sm'>{context?.cartProductCount}</p>
+                            </div>
+                        
+                    
+                        </div>
+                    )
+                }
+
+                
 
                 <div>
                     {

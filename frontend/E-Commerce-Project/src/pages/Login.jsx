@@ -18,7 +18,7 @@ const Login = () => {
     })
 
     const navigate = useNavigate()
-    const {fetchUserDetails} = useContext(Context)
+    const { fetchUserDetails, fetchUserAddToCart } = useContext(Context)
 
     const handleOnChange = (e) =>{
         const { name , value } = e.target
