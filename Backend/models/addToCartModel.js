@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 // Define the schema for the user model
 const addToCart = new mongoose.Schema(
   {
-    product_Id: {
-      ref: "product",
-      type: String,
+    productId: {
+      ref: "Product",
+      type: mongoose.Schema.Types.ObjectId,
     },
-    quantity: Number, 
+    quantity: Number,
     userId: String,
   },
   {
