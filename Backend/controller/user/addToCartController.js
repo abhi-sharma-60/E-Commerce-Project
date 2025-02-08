@@ -1,4 +1,5 @@
 const addToCartModel = require("../../models/addToCartModel");
+const mongoose = require("mongoose"); // Import mongoose
 
 const addToCartController = async (req, res) => {
   try {
@@ -18,13 +19,15 @@ const addToCartController = async (req, res) => {
       });
     }
 
+    const objectProductId = new mongoose.Types.ObjectId(productId);
+
     const payload = {
-      product_Id: productId,
+      productId: objectProductId,
       quantity: 1,
       userId: currentUser,
     };
 
-    const newAddToCart = await addToCartModel(payload);
+    const newAddToCart = new addToCartModel(payload);
     const saveProduct = await newAddToCart.save();
 
     return res.json({
