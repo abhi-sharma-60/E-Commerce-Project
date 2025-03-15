@@ -50,8 +50,9 @@ const Header = () => {
     if(value){
       navigate(`/search?q=${value}`)
     }else{
-      navigate("/search")
+      navigate("/")
     }
+    //navigate("/")
   }
 
   return (
