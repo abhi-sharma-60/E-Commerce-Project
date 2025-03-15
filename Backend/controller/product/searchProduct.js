@@ -4,18 +4,25 @@ const searchProduct = async (req, res) => {
   try {
     const query = req.query.q;
 
-    const regex = new RegExp(query, "i", "g");
+    if (!query) {
+      return res.json({
+        data: [],
+        message: "No search query provided",
+        error: true,
+        success: false,
+      });
+    }
+
+    const regex = new RegExp(query, "ig");
+
+    // console.log("Search query:", query);
+    // console.log("Regex used:", regex);
 
     const product = await productModel.find({
-      $or: [
-        {
-          productName: regex,
-        },
-        {
-          category: regex,
-        },
-      ],
+      $or: [{ productName: regex }, { category: regex }],
     });
+
+    // console.log("Search results:", product);
 
     res.json({
       data: product,
@@ -24,6 +31,7 @@ const searchProduct = async (req, res) => {
       success: true,
     });
   } catch (err) {
+    console.error("Error in searchProduct:", err);
     res.json({
       message: err.message || err,
       error: true,
