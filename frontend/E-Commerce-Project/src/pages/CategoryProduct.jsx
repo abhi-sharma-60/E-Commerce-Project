@@ -48,9 +48,12 @@ const CategoryProduct = () => {
       })
     }
 
-    useEffect(()=>{
-      fetchData()
-    },[filterCategoryList])
+    useEffect(() => {
+      if (filterCategoryList.length > 0) {
+        fetchData();
+      }
+    }, [filterCategoryList]);
+    
 
     useEffect(()=>{
       const arrayOfCategory = Object.keys(selectCategory).map(categoryKeyName =>{
