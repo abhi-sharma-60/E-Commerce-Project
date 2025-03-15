@@ -45,7 +45,7 @@ router.get("/get-product", getProductController);
 router.get("/get-categoryProduct", getCategoryProductOne);
 router.post("/category-product", getCategoryWiseProduct);
 router.post("/product-details", getProductDtails);
-router.post("/search", searchProduct);
+router.get("/search", searchProduct);
 router.post("/filter-product", filterProductController);
 
 // user cart
