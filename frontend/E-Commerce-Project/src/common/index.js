@@ -76,6 +76,10 @@ const SummaryApi = {
     filterProduct : {
         url : `${backendDomain}/api/filter-product`,
         method : 'post'
+    },
+    verifyPayment: {
+        url : `${backendDomain}/api/payments/verify`,
+        method : 'post'
     }
 }
 
