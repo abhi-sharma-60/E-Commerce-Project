@@ -9,6 +9,7 @@ router.use(cookieParser());
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
+const googleLogin = require("../controller/user/googleLogin")
 const userSignUpController = require("../controller/user//userSignUp");
 const userSignInController = require("../controller/user/userSignIn");
 const userDetailsController = require("../controller/user/userDetails");
@@ -36,6 +37,7 @@ const verifyPayment = require("../controller/transaction/verifyPayment");
 router.post("/signup", userSignUpController);
 
 router.post("/signin", userSignInController);
+router.post("/google-login",googleLogin);
 router.get("/user-details", authToken, userDetailsController);
 router.get("/userLogout", userLogout);
 // admin panel

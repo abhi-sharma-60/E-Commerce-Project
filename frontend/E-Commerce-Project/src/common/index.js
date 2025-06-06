@@ -80,6 +80,10 @@ const SummaryApi = {
     verifyPayment: {
         url : `${backendDomain}/api/payments/verify`,
         method : 'post'
+    },
+    googleLogin : {
+        url : `${backendDomain}/api/google-login`,
+        method : 'post'
     }
 }
 

@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import SummaryApi from '../common';
 import { toast } from 'react-toastify';
 import Context from '../context';
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 const Login = () => {
 
@@ -56,6 +57,50 @@ const Login = () => {
             toast.error(dataApi.message)
         }
     }
+
+
+    // Handle Google login
+  const handleGoogleLoginSuccess = async (credentialResponse) => {
+    try {
+        const idToken = credentialResponse?.credential;
+
+    if (!idToken) {
+      throw new Error("No token received from Google");
+    }
+      const dataResponse = await fetch(SummaryApi.googleLogin.url, {
+        method: SummaryApi.googleLogin.method,
+        credentials : 'include',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+         idToken:  credentialResponse.credential,
+        }),
+      })
+
+      const dataApi = await dataResponse.json()
+
+        if(dataApi.success){
+            toast.success(dataApi.message)
+            navigate('/')
+            fetchUserDetails()
+            fetchUserAddToCart()
+        }
+
+        if(dataApi.error){
+            toast.error(dataApi.message)
+        }
+
+    } catch (error) {
+      setErrorMessage("Failed to sign in with Google. Please try again.");
+    }
+  };
+
+
+  const handleGoogleLoginFailure = () => {
+    setErrorMessage("Google login failed. Please try again.");
+  };
+
 
 
 return (
@@ -115,6 +160,22 @@ return (
 
                 <p className='my-5'>Don't have account ? <Link to={"/sign-up"} className=' text-red-600 hover:text-red-700 hover:underline'>Sign up</Link></p>
             </div>
+
+            <div className="mt-6">
+        <div className="flex items-center justify-center mb-4">
+          <div className="border-t border-gray-300 flex-grow"></div>
+          <span className="mx-4 text-gray-500">OR</span>
+          <div className="border-t border-gray-300 flex-grow"></div>
+        </div>
+        <div className="flex justify-center">
+          <GoogleOAuthProvider clientId={import.meta.env.VITE_REACT_APP_GOOGLE_CLIENT_ID}>
+            <GoogleLogin
+              onSuccess={handleGoogleLoginSuccess}
+              onError={handleGoogleLoginFailure}
+            />
+          </GoogleOAuthProvider>
+        </div>
+      </div>
 
             
 

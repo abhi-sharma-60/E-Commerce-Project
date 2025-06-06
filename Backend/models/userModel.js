@@ -17,11 +17,15 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true, // Password is mandatory
+      //required: true, // Password is mandatory
     },
     profilePic: {
       type: String, // URL or file path for the profile picture
       default: "", // Default value if no profile picture is provided
+    },
+    isGoogleUser: {
+      type: Boolean,
+      default: false
     },
     role: String,
   },
