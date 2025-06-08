@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { MdCloudUpload, MdDelete } from "react-icons/md";
 import productCategory from "../helpers/productCategory";
@@ -15,6 +15,14 @@ const AdminEditProduct = ({ onClose, productData, fetchdata }) => {
 
   const [openFullScreenImage, setOpenFullScreenImage] = useState(false);
   const [fullScreenImage, setFullScreenImage] = useState("");
+
+  const nameInputRef = useRef(null);
+
+  useEffect(() => {
+    if (nameInputRef.current) {
+      nameInputRef.current.focus();
+    }
+  }, []);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -58,8 +66,8 @@ const AdminEditProduct = ({ onClose, productData, fetchdata }) => {
 
   return (
     <div className="fixed inset-0 bg-gradient-to-br from-pink-100 via-rose-100 to-pink-200 bg-opacity-70 flex items-center justify-center z-50">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90%] overflow-hidden border border-pink-200">
-        <div className="flex justify-between items-center p-4 border-b border-pink-200">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90%] overflow-y-auto scrollbar-thin scrollbar-thumb-rose-300 border border-pink-200">
+        <div className="flex justify-between items-center p-4 border-b border-pink-200 sticky top-0 bg-white z-10">
           <h2 className="text-2xl font-extrabold text-rose-600">
             Edit Product
           </h2>
@@ -70,15 +78,14 @@ const AdminEditProduct = ({ onClose, productData, fetchdata }) => {
             <IoCloseSharp />
           </button>
         </div>
-        <form
-          onSubmit={handleSubmit}
-          className="overflow-y-auto h-[80vh] px-6 py-4 space-y-4"
-        >
+
+        <form onSubmit={handleSubmit} className="px-6 py-4 space-y-4">
           <div>
             <label className="block mb-1 font-semibold text-gray-700">
               Product Name
             </label>
             <input
+              ref={nameInputRef}
               type="text"
               name="productName"
               value={data.productName}
@@ -213,7 +220,7 @@ const AdminEditProduct = ({ onClose, productData, fetchdata }) => {
             ></textarea>
           </div>
 
-          <div className="pt-2">
+          <div className="pt-2 pb-6">
             <button
               type="submit"
               className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white py-2 rounded-lg shadow hover:from-rose-600 hover:to-pink-600 transition-all"
