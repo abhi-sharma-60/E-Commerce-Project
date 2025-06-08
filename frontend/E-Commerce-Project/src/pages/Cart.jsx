@@ -3,12 +3,20 @@ import SummaryApi from '../common'
 import Context from '../context'
 import displayINRCurrency from '../helpers/displayCurrency'
 import { MdDelete } from "react-icons/md";
+import Payment from "../components/Payment";
+import { useSelector } from 'react-redux';
+
+
 
 const Cart = () => {
     const [data,setData] = useState([])
     const [loading,setLoading] = useState(false)
     const context = useContext(Context)
+    const [showPayment,setShowPayment] = useState(false);
     const loadingCart = new Array(4).fill(null)
+    // Inside your component function
+const buyerId = useSelector(state => state.user.user?._id);
+
 
 
     const fetchData = async() =>{
@@ -191,7 +199,18 @@ const Cart = () => {
                                         <p>{displayINRCurrency(totalPrice)}</p>    
                                     </div>
 
-                                    <button className='bg-blue-600 p-2 text-white w-full mt-2'>Payment</button>
+                                    <button onClick={() => setShowPayment(true)} 
+                                    className='bg-blue-600 p-2 text-white w-full mt-2'>
+                                        Payment
+                                    </button>
+
+                                    {showPayment && (
+                                    <Payment
+                                    amount={totalPrice}           // raw number in rupees
+                                    buyerId={buyerId}       // seller’s user ID
+                                    onClose={() => setShowPayment(false)}
+                                    />
+                                    )}
 
                                 </div>
                             )

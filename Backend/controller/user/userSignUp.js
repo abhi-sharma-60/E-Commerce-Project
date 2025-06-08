@@ -36,7 +36,7 @@ async function userSignUpController(req, res) {
     const saveUser = await userData.save();
     res.status(201).json({
       data: saveUser,
-      succss: true,
+      success: true,
       error: false,
       message: "User Created Successfully!",
     });

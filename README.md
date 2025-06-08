@@ -1,4 +1,5 @@
 # E-Commerce-Project
-CONTRIBUTORS : 
-1. ABHISHEK SHARMA 
-2. ADITYA PRATAP
+
+## CONTRIBUTORS  
+1. [Abhishek Sharma](https://www.linkedin.com/in/abhishek-sharma-mnnit27/)  
+2. [Aditya Pratap](https://www.linkedin.com/in/adityapratap2005/)  

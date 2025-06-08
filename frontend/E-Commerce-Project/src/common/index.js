@@ -76,6 +76,14 @@ const SummaryApi = {
     filterProduct : {
         url : `${backendDomain}/api/filter-product`,
         method : 'post'
+    },
+    verifyPayment: {
+        url : `${backendDomain}/api/payments/verify`,
+        method : 'post'
+    },
+    googleLogin : {
+        url : `${backendDomain}/api/google-login`,
+        method : 'post'
     }
 }
 

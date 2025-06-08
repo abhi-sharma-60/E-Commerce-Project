@@ -9,6 +9,7 @@ router.use(cookieParser());
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
+const googleLogin = require("../controller/user/googleLogin")
 const userSignUpController = require("../controller/user//userSignUp");
 const userSignInController = require("../controller/user/userSignIn");
 const userDetailsController = require("../controller/user/userDetails");
@@ -29,9 +30,14 @@ const deleteAddToCartProduct = require("../controller/user/deleteAddToCartProduc
 const searchProduct = require("../controller/product/searchProduct");
 const filterProductController = require("../controller/product/filterProduct");
 
+//transaction
+const verifyPayment = require("../controller/transaction/verifyPayment");
+
+
 router.post("/signup", userSignUpController);
 
 router.post("/signin", userSignInController);
+router.post("/google-login",googleLogin);
 router.get("/user-details", authToken, userDetailsController);
 router.get("/userLogout", userLogout);
 // admin panel
@@ -45,7 +51,7 @@ router.get("/get-product", getProductController);
 router.get("/get-categoryProduct", getCategoryProductOne);
 router.post("/category-product", getCategoryWiseProduct);
 router.post("/product-details", getProductDtails);
-router.post("/search", searchProduct);
+router.get("/search", searchProduct);
 router.post("/filter-product", filterProductController);
 
 // user cart
@@ -54,6 +60,13 @@ router.get("/countAddToCartProduct", authToken, countAddToCartProduct);
 router.get("/view-cart-product", authToken, addToCartViewProduct);
 router.post("/update-cart-product", authToken, updateAddToCartProduct);
 router.post("/delete-cart-product", authToken, deleteAddToCartProduct);
- 
+
+
+
+//transaction routes
+router.post("/payments/verify", verifyPayment);
+
+
+
 module.exports = router;
 

@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import Logo from "./Logo.jsx"
 import { FaSearch } from "react-icons/fa"
 import { FaUserCircle } from "react-icons/fa"
 import { MdOutlineShoppingCart } from "react-icons/md"
@@ -43,29 +44,41 @@ const Header = () => {
 
   }
 
-  const handleSearch = (e)=>{
-    const { value } = e.target
-    setSearch(value)
-
-    if(value){
-      navigate(`/search?q=${value}`)
-    }else{
-      navigate("/search")
+  const handleSearch = (e) => {
+    const { value } = e.target;
+    setSearch(value);
+  };
+  
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevents default form submission
+      if (search.trim()) {
+        navigate(`/search?q=${search.trim()}`);
+      } else {
+        navigate("/");
+      }
     }
-  }
+  };
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setSearch('');
+    }
+  }, [location.pathname]);
+  
 
   return (
     <header className='h-16 shadow-md bg-white fixed w-full z-40'>
         <div className='h-full container mx-auto flex items-center px-4 justify-between'>
             <div className=''>
                 <Link to={"/"}>
-                    {/*Logo*/}logo
+                    <Logo/>
                 </Link>
             </div>
 
 
             <div className='hidden lg:flex items-center w-full justify-between max-w-sm border rounded-full focus-within:shadow pl-2'>
-                <input type='text' placeholder='search product here...' className='w-full outline-none' onChange={handleSearch} value={search}/>
+                <input type='text' placeholder='search product here...' className='w-full outline-none'  onChange={handleSearch} onKeyDown={handleKeyDown} value={search}/>
                 <div className='text-lg min-w-[50px] h-8 bg-red-600 flex items-center justify-center rounded-r-full text-white'>
                   <FaSearch />
                 </div>
