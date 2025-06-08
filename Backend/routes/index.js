@@ -67,6 +67,15 @@ router.post("/delete-cart-product", authToken, deleteAddToCartProduct);
 router.post("/payments/verify", verifyPayment);
 
 
+// setting cors 
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: "https://digimart-digital-electronics-e-commerce-rq90.onrender.com",
+    credentials: true,
+  })
+);
 
 module.exports = router;
 
