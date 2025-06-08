@@ -2,6 +2,7 @@ const express = require("express");
 const authToken = require("../middleware/authToken");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const app = express();
 
 const router = express.Router();
 router.use(cookieParser());
