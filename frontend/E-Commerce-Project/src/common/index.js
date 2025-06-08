@@ -1,4 +1,4 @@
-const backendDomain ="https://digimart-digital-electronics-e-commerce.onrender.com";
+const backendDomain ="https://digimart-oo8ff7fzd-abhisheks-projects-1737903b.vercel.app";
 
 const SummaryApi = {
     signUP : {
