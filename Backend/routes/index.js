@@ -3,6 +3,7 @@ const authToken = require("../middleware/authToken");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const app = express();
+const serverless = require("serverless-http");
 
 const router = express.Router();
 router.use(cookieParser());
@@ -68,15 +69,14 @@ router.post("/delete-cart-product", authToken, deleteAddToCartProduct);
 router.post("/payments/verify", verifyPayment);
 
 
-// setting cors 
-const cors = require("cors");
+// Example route
+router.get("/", (req, res) => {
+  res.json({ message: "Backend working on Vercel!" });
+});
 
-app.use(
-  cors({
-    origin: "https://digimart-digital-electronics-e-commerce.onrender.com",
-    credentials: true,
-  })
-);
+app.use("/api", router);
+
+module.exports.handler = serverless(app);
 
 module.exports = router;
 
