@@ -11,8 +11,8 @@ router.use(cookieParser());
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-const googleLogin = require("../controller/user/googleLogin")
-const userSignUpController = require("../controller/user//userSignUp");
+const googleLogin = require("../controller/user/googleLogin");
+const userSignUpController = require("../controller/user/userSignUp");
 const userSignInController = require("../controller/user/userSignIn");
 const userDetailsController = require("../controller/user/userDetails");
 const userLogout = require("../controller/user/userLogout");
@@ -35,11 +35,10 @@ const filterProductController = require("../controller/product/filterProduct");
 //transaction
 const verifyPayment = require("../controller/transaction/verifyPayment");
 
-
 router.post("/signup", userSignUpController);
 
 router.post("/signin", userSignInController);
-router.post("/google-login",googleLogin);
+router.post("/google-login", googleLogin);
 router.get("/user-details", authToken, userDetailsController);
 router.get("/userLogout", userLogout);
 // admin panel
@@ -63,11 +62,8 @@ router.get("/view-cart-product", authToken, addToCartViewProduct);
 router.post("/update-cart-product", authToken, updateAddToCartProduct);
 router.post("/delete-cart-product", authToken, deleteAddToCartProduct);
 
-
-
 //transaction routes
 router.post("/payments/verify", verifyPayment);
-
 
 // Example route
 router.get("/", (req, res) => {
@@ -79,4 +75,3 @@ app.use("/api", router);
 module.exports.handler = serverless(app);
 
 module.exports = router;
-

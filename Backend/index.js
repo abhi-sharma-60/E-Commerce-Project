@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const connectDB = require("./config/db");
-const router = require("./routes/index");
+const router = require("./api/index");
 const cookieParser = require("cookie-parser");
 
 const app = express();
@@ -18,8 +18,8 @@ app.use(cookieParser());
 const PORT = 8080 || process.env.PORT;
 
 // Example route
-router.get('/', (req, res) => {
-  res.json({ message: 'Backend working on Vercel!' });
+router.get("/", (req, res) => {
+  res.json({ message: "Backend working on Vercel!" });
 });
 app.use("/api", router);
 
