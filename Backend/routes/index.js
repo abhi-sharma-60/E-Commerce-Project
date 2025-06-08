@@ -73,7 +73,7 @@ const cors = require("cors");
 
 app.use(
   cors({
-    origin: "https://digimart-digital-electronics-e-commerce-rq90.onrender.com",
+    origin: "https://digimart-digital-electronics-e-commerce.onrender.com",
     credentials: true,
   })
 );
