@@ -1,24 +1,6 @@
 const express = require("express");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-const serverless = require("serverless-http");
-
-const authToken = require("../middleware/authToken");
-
-const app = express();
 const router = express.Router();
-
-// CORS config to allow frontend requests (replace domain as needed)
-app.use(
-  cors({
-    origin: "https://digimart-digital-electronics-e-commerce-rq90.onrender.com", // ✅ Replace this
-    credentials: true,
-  })
-);
-
-app.use(express.json());
-app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
+const authToken = require("../middleware/authToken");
 
 // Controllers
 const googleLogin = require("../controller/user/googleLogin");
@@ -44,7 +26,6 @@ const addToCartViewProduct = require("../controller/user/addToCartViewProduct");
 const updateAddToCartProduct = require("../controller/user/updateAddToCartProduct");
 const deleteAddToCartProduct = require("../controller/user/deleteAddToCartProduct");
 
-// Transactions
 const verifyPayment = require("../controller/transaction/verifyPayment");
 
 // Auth Routes
@@ -78,9 +59,4 @@ router.post("/delete-cart-product", authToken, deleteAddToCartProduct);
 // Transactions
 router.post("/payments/verify", verifyPayment);
 
-app.use("/api", router);
-
-module.exports = {
-  handler: serverless(app), // For serverless deployment
-  app, // For local or production server
-};
+module.exports = router;
