@@ -17,12 +17,6 @@ app.use("/api", router);
 app.use(cookieParser());
 const PORT = 8080 || process.env.PORT;
 
-// Example route
-router.get("/", (req, res) => {
-  res.json({ message: "Backend working on Vercel!" });
-});
-app.use("/api", router);
-
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
