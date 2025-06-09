@@ -1,18 +1,26 @@
 const express = require("express");
-const authToken = require("../middleware/authToken");
-const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const app = express();
-const serverless = require("serverless-http");
 const cors = require("cors");
+const serverless = require("serverless-http");
+
+const authToken = require("../middleware/authToken");
+
+const app = express();
 const router = express.Router();
-router.use(cookieParser());
-app.use(cors());
+
+// CORS config to allow frontend requests (replace domain as needed)
+app.use(
+  cors({
+    origin: "https://digimart-digital-electronics-e-commerce-rq90.onrender.com", // ✅ Replace this
+    credentials: true,
+  })
+);
+
 app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
-
+// Controllers
 const googleLogin = require("../controller/user/googleLogin");
 const userSignUpController = require("../controller/user/userSignUp");
 const userSignInController = require("../controller/user/userSignIn");
@@ -20,63 +28,59 @@ const userDetailsController = require("../controller/user/userDetails");
 const userLogout = require("../controller/user/userLogout");
 const allUsers = require("../controller/user/allUsers");
 const updateUser = require("../controller/user/updateUser");
+
 const UploadPorductController = require("../controller/product/uploadProduct");
 const getProductController = require("../controller/product/getProduct");
 const updateProductController = require("../controller/product/updateProduct");
 const getCategoryProductOne = require("../controller/product/getCategoryProductOne");
 const getCategoryWiseProduct = require("../controller/product/getCategoryWiseProduct");
-const getProductDtails = require("../controller/product/getProductDetails");
+const getProductDetails = require("../controller/product/getProductDetails");
+const searchProduct = require("../controller/product/searchProduct");
+const filterProductController = require("../controller/product/filterProduct");
+
 const addToCartController = require("../controller/user/addToCartController");
 const countAddToCartProduct = require("../controller/user/countAddToCartProduct");
 const addToCartViewProduct = require("../controller/user/addToCartViewProduct");
 const updateAddToCartProduct = require("../controller/user/updateAddToCartProduct");
 const deleteAddToCartProduct = require("../controller/user/deleteAddToCartProduct");
-const searchProduct = require("../controller/product/searchProduct");
-const filterProductController = require("../controller/product/filterProduct");
 
-//transaction
+// Transactions
 const verifyPayment = require("../controller/transaction/verifyPayment");
 
+// Auth Routes
 router.post("/signup", userSignUpController);
-
 router.post("/signin", userSignInController);
 router.post("/google-login", googleLogin);
 router.get("/user-details", authToken, userDetailsController);
 router.get("/userLogout", userLogout);
-// admin panel
+
+// Admin
 router.get("/all-user", authToken, allUsers);
 router.post("/update-user", authToken, updateUser);
-router.post("/update-product", authToken, updateProductController);
-// product
+
+// Product
 router.post("/upload-product", authToken, UploadPorductController);
-// get product
+router.post("/update-product", authToken, updateProductController);
 router.get("/get-product", getProductController);
 router.get("/get-categoryProduct", getCategoryProductOne);
 router.post("/category-product", getCategoryWiseProduct);
-router.post("/product-details", getProductDtails);
+router.post("/product-details", getProductDetails);
 router.get("/search", searchProduct);
 router.post("/filter-product", filterProductController);
 
-// user cart
+// Cart
 router.post("/addtocart", authToken, addToCartController);
 router.get("/countAddToCartProduct", authToken, countAddToCartProduct);
 router.get("/view-cart-product", authToken, addToCartViewProduct);
 router.post("/update-cart-product", authToken, updateAddToCartProduct);
 router.post("/delete-cart-product", authToken, deleteAddToCartProduct);
 
-//transaction routes
+// Transactions
 router.post("/payments/verify", verifyPayment);
 
-// Example route
-router.get("/", (req, res) => {
-  res.json({ message: "Backend working on Vercel!" });
-});
-
 app.use("/api", router);
-app.post("/api/signin", (req, res) => {
-  const { username, password } = req.body;
-  // login logic
-  res.json({ success: true, token: "fake-jwt-token" });
-});
 
-module.exports = router;
+module.exports = {
+  handler: serverless(app), // For serverless deployment
+  app, // For local or production server
+};
