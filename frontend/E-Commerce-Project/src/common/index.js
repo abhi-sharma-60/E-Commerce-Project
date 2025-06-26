@@ -84,6 +84,10 @@ const SummaryApi = {
     googleLogin : {
         url : `${backendDomain}/api/google-login`,
         method : 'post'
+    },
+    getOrder : {
+        url : `${backendDomain}/api/getOrder`,
+        method : 'get'
     }
 }
 

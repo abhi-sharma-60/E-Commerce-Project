@@ -28,6 +28,8 @@ const deleteAddToCartProduct = require("../controller/user/deleteAddToCartProduc
 
 const verifyPayment = require("../controller/transaction/verifyPayment");
 
+const getOrder = require("../controller/order/getOrder")
+
 // Auth Routes
 router.post("/signup", userSignUpController);
 router.post("/signin", userSignInController);
@@ -58,5 +60,8 @@ router.post("/delete-cart-product", authToken, deleteAddToCartProduct);
 
 // Transactions
 router.post("/payments/verify", verifyPayment);
+
+//Orders
+router.get("/getOrder", authToken, getOrder);
 
 module.exports = router;
