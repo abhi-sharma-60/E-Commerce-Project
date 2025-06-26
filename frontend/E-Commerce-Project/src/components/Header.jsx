@@ -122,6 +122,18 @@ const Header = () => {
                     </Link>
                   )}
                 </nav>
+
+                <nav>
+                  
+                    <Link
+                      to={"/orders"}
+                      className="whitespace-nowrap hidden md:block hover:bg-slate-100 p-2"
+                      onClick={() => setMenu((prev) => !prev)}
+                    >
+                      Past Orders
+                    </Link>
+                  
+                </nav>
               </div>
             )}
           </div>

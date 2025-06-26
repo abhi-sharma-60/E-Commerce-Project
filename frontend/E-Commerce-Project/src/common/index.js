@@ -1,4 +1,4 @@
-const backendDomain = "https://digimart-digital-electronics-e-commerce.onrender.com"
+const backendDomain = "http://localhost:8080"
 
 const SummaryApi = {
     signUP : {
@@ -84,6 +84,10 @@ const SummaryApi = {
     googleLogin : {
         url : `${backendDomain}/api/google-login`,
         method : 'post'
+    },
+    getOrder : {
+        url : `${backendDomain}/api/getOrder`,
+        method : 'get'
     }
 }
 
